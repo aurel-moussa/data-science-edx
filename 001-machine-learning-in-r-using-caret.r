@@ -57,3 +57,16 @@ y_hat <- ifelse(test_set$height > best_cutoff, "Male", "Female") %>%
   factor(levels = levels(test_set$sex))
 y_hat <- factor(y_hat)
 mean(y_hat == test_set$sex)
+
+# tabulate each combination of prediction and actual value to see why the accuracy is misleading!
+table(predicted = y_hat, actual = test_set$sex)
+
+#how accurate are we for the different categories?
+test_set %>% 
+  mutate(y_hat = y_hat) %>%
+  group_by(sex) %>% 
+  summarize(accuracy = mean(y_hat == sex))
+prev <- mean(y == "Male")
+prev #what is the prevalence of males in this dataset?
+
+confusionMatrix(data = y_hat, reference = test_set$sex) #create confusion matris using caret
