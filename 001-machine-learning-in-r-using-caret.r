@@ -1,4 +1,4 @@
-###Non-ML algorithms to predict a category###
+###Non-advanced ML algorithms to predict a category###
 
 #Get all required R packages
 library(tidyverse)
@@ -70,3 +70,26 @@ prev <- mean(y == "Male")
 prev #what is the prevalence of males in this dataset?
 
 confusionMatrix(data = y_hat, reference = test_set$sex) #create confusion matris using caret
+#improve the cutoffs by using F-score instead of mean accuracy
+# maximize F-score
+cutoff <- seq(50, 70, 0.5) #mmake them 0.5 steps
+F_1 <- map_dbl(cutoff, function(x){
+  y_hat <- ifelse(train_set$height > x, "Male", "Female") %>% 
+    factor(levels = levels(test_set$sex))
+  F_meas(data = y_hat, reference = factor(train_set$sex))
+})
+
+data.frame(cutoff, F_1) %>% #visluaze
+  ggplot(aes(cutoff, F_1)) + 
+  geom_point() + 
+  geom_line()
+
+max(F_1) #what'sbest
+
+best_cutoff <- cutoff[which.max(F_1)] #make whats best the cutoff
+best_cutoff
+
+y_hat <- ifelse(test_set$height > best_cutoff, "Male", "Female") %>% 
+  factor(levels = levels(test_set$sex))
+sensitivity(data = y_hat, reference = test_set$sex)
+specificity(data = y_hat, reference = test_set$sex)
