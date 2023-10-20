@@ -1,1 +1,1 @@
-Data Science project from edX
+Data Science course from edX
