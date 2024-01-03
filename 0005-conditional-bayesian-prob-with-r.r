@@ -22,3 +22,7 @@ mean(test)
 #Since this is a binary variable P(negative) = P(negative | NOT disease) * P(NOT disease) + P(negative | disease) * P(disease)
 #or just using the dataset 1-mean(test)
 0.15*mean(disease)/(1-mean(test))
+
+# probability that you have the disease if the test is positive
+#P(disease | positive) = P(positive | disease) * P(disease) / P(positive)
+0.85*mean(disease)/mean(test)
