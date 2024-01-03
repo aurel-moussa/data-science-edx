@@ -26,3 +26,9 @@ mean(test)
 # probability that you have the disease if the test is positive
 #P(disease | positive) = P(positive | disease) * P(disease) / P(positive)
 0.85*mean(disease)/mean(test)
+
+#prevalence of disease in people who test positive to the overall prevalence of disease.
+#If a patient's test is positive, by how many times does that increase their risk of having the disease?
+#calculate the probability of having the disease given a positive test, then divide by the probability of having the disease
+
+(0.85*mean(disease)/mean(test)) / 0.02
