@@ -16,3 +16,9 @@ test[disease==1] <- sample(c(0,1), size=sum(disease==1), replace=TRUE, prob=c(0.
 
 #what is prob that test is positive?
 mean(test)
+
+#probability that an individual has the disease if the test is negative?
+#P(disease | negative) = P(negative | disease) * P(disease) / P(negative)
+#Since this is a binary variable P(negative) = P(negative | NOT disease) * P(NOT disease) + P(negative | disease) * P(disease)
+#or just using the dataset 1-mean(test)
+0.15*mean(disease)/(1-mean(test))
