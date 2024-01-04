@@ -32,3 +32,29 @@ mean(test)
 #calculate the probability of having the disease given a positive test, then divide by the probability of having the disease
 
 (0.85*mean(disease)/mean(test)) / 0.02
+
+
+##compute conditional probabilities for being male in the heights dataset (part of the dslabs package). 
+#Round the heights to the closest inch. Plot the estimated conditional probability
+
+library(dslabs)
+data("heights")
+heights %>% 
+	mutate(height = round(height)) %>%
+	group_by(height) %>%
+	summarize(p = mean(sex == "Male")) %>%    
+	qplot(height, p, data =.)
+
+#there'll be lots of variability for heights where we do not have lots of data points
+#one way to deal with this is to instead group not by heights, but by quartiles
+#we can use cut() function to make each group have the same number of data points
+#cut(x, quantile(x, seq(0, 1, 0.1)), include.lowest = TRUE) cuts a dataset x into specific groups
+#in this case, cutting x via quantiles
+
+ps <- seq(0, 1, 0.1)
+heights %>% 
+	mutate(g = cut(height, quantile(height, ps), include.lowest = TRUE)) %>%
+	group_by(g) %>%
+	summarize(p = mean(sex == "Male"), height = mean(height)) %>%
+	qplot(height, p, data =.)
+    
