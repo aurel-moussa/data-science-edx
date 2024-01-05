@@ -16,7 +16,9 @@ dat <- MASS::mvrnorm(n = 100, c(69, 69), Sigma) %>%
 
 output_square_deviation <- c() #empty vector
 
-partition_and_model_function <- function(input_dataset) {test_index <- createDataPartition(input_dataset, times = 1, p = 0.5, list = FALSE)
+partition_and_model_function <- function(input_dataset) {
+y <- input_dataset$y        
+test_index <- createDataPartition(y, times = 1, p = 0.5, list = FALSE)
 train_set <- input_dataset %>% slice(-test_index) #slice the input_dataset set, and drop all the indexes as defined in test-index
 test_set <- input_dataset %>% slice(test_index)  #slice the input_dataset set, and keep all the indexes as defined in test-index
 fit <- lm(y ~ x, data = train_set) #lm fits linear models, including multivariate ones, first parameter being the symbolic description of the model to be fitted, here: describe y via x
