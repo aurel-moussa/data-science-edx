@@ -36,3 +36,13 @@ y_hat <- fit$coef[1] + fit$coef[2]*test_set$father
 
 #mean square error loss function
 mean((y_hat - test_set$son)^2)
+
+#instead of writing out the predictor function y_hat <- fit$coef[1] + fit$coef[2]*test_set$father
+#we can also use the predict() function, which can take lm models as inputs (and other models)
+y_hat <- predict(fit, test_set)
+
+#mean square error loss function
+mean((y_hat - test_set$son)^2)
+
+#predict() is a generic function in R that calls other functions depending on what kind of object it receives
+#always look into the specifics, e.g., by running ?predict.lm or ?predict.knn
