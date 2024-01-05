@@ -26,3 +26,5 @@ root_mean_square_deviation <- mean((y_hat - test_set$y)^2)
 print(root_mean_square_deviation)
 output_square_deviation <- append(output_square_deviation, root_mean_square_deviation)                                                     
 }
+
+replicate(100, partition_and_model_function(dat))
