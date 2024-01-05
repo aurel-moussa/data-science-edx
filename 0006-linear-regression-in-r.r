@@ -6,13 +6,16 @@ library(tidyverse)
 library(HistData)
 
 galton_heights <- GaltonFamilies %>%
-  filter(childNum == 1 & gender == "male") %>%
+  filter(childNum == 1 & gender == "male") %>% #only interested in data on first-born sons
   select(father, childHeight) %>%
   rename(son = childHeight)
 
 library(caret)
 y <- galton_heights$son
-test_index <- createDataPartition(y, times = 1, p = 0.5, list = FALSE)
+test_index <- createDataPartition(y, times = 1, p = 0.5, list = FALSE) 
+#y what to partiion, times how many partitions to make (I can just make one, and if included make it the test set, and if NOT included make it the train set)
+#p the percentage to be included in the partition
+#list FALSE to make a matrix instead of a list, this is required so that later I can index using test_index[1], test_index[2] and so on
 
 train_set <- galton_heights %>% slice(-test_index)
 test_set <- galton_heights %>% slice(test_index)
