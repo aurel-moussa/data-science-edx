@@ -30,4 +30,4 @@ output_square_deviation <- append(output_square_deviation, root_mean_square_devi
 return(root_mean_square_deviation)
 }
 
-replicate(100, partition_and_model_function(dat))
+output_square_deviation <- replicate(100, partition_and_model_function(dat))
