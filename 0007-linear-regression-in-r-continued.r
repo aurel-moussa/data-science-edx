@@ -31,3 +31,5 @@ return(root_mean_square_deviation)
 }
 
 output_square_deviation <- replicate(100, partition_and_model_function(dat))
+mean(output_square_deviation)
+sd(output_square_deviation)
