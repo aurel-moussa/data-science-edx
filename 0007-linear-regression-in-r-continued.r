@@ -47,3 +47,11 @@ sd(output_square_deviation)
 #Note: You only need to set the seed once before running your function; 
 #do not set a seed within your function.
 #Also be sure to use sapply() or map() as you will get different answers running the simulations individually due to setting the seed.
+
+create_datasets <- function(input_size_of_dataframe){
+        n <- input_size_of_dataframe
+        Sigma <- 9*matrix(c(1.0, 0.5, 0.5, 1.0), 2, 2)
+        dat <- MASS::mvrnorm(n = 100, c(69, 69), Sigma) %>%
+        data.frame() %>% setNames(c("x", "y"))
+        return dat
+}
