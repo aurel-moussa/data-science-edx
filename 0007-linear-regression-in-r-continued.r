@@ -24,7 +24,7 @@ test_set <- input_dataset %>% slice(test_index)  #slice the input_dataset set, a
 fit <- lm(y ~ x, data = train_set) #lm fits linear models, including multivariate ones, first parameter being the symbolic description of the model to be fitted, here: describe y via x
 print(fit$coef)
 y_hat <- predict(fit, test_set)
-root_mean_square_deviation <- mean((y_hat - test_set$y)^2)
+root_mean_square_deviation <- sqrt(mean((y_hat - test_set$y)^2))
 print(root_mean_square_deviation)
 output_square_deviation <- append(output_square_deviation, root_mean_square_deviation)        #does not work?
 return(root_mean_square_deviation)
