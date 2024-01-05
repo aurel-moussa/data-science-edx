@@ -99,3 +99,14 @@ res <- sapply(n, function(n){
 })
 
 res
+
+#########
+
+#To repeat the exercise from the very top, this time making the correlation between x and y larger, as in the following code:
+
+
+set.seed(1, sample.kind="Rounding") # if using R 3.6 or later
+n <- 100
+Sigma <- 9*matrix(c(1.0, 0.95, 0.95, 1.0), 2, 2)
+dat <- MASS::mvrnorm(n = 100, c(69, 69), Sigma) %>%
+	data.frame() %>% setNames(c("x", "y"))
