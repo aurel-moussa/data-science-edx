@@ -64,7 +64,13 @@ dataset_creation_partition_and_model <- function(input_size_of_dataframe) {
         output_root_mean_square_error <- replicate(100, partition_and_model_function(created_dataframe))
         mean_output_RMSR <- mean(output_root_mean_square_error)
         sd_output_RMSR <- sd(output_root_mean_square_error)
-        print(paste('For size of ', input_size_of_dataframe, 'the mean of the RMSE is ', mean_output_RMSR, 'and the standard deviation ', sd_output_RMSR ))
+          result <- list(
+            size = input_size_of_dataframe,
+            mean_RMSE = mean_output_RMSR,
+            sd_RMSE = sd_output_RMSR
+  )
+  
+  return(result)
 }
 
 
