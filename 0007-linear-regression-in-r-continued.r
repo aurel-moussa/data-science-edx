@@ -33,3 +33,17 @@ return(root_mean_square_error)
 output_square_deviation <- replicate(100, partition_and_model_function(dat))
 mean(output_square_deviation)
 sd(output_square_deviation)
+
+##########################################
+#we will repeat the exercise above but using larger datasets. 
+#Write a function that takes a size n, 
+#then (1) builds a dataset using the code provided at the top 
+#but with n observations instead of 100 and without the set.seed(1), 
+#(2) runs the replicate() loop that I wrote above, which builds 100 linear models and returns a vector of RMSEs, 
+#and (3) calculates the mean and standard deviation of the 100 RMSEs.
+
+#Set the seed to 1 (if using R 3.6 or later, use the argument sample.kind="Rounding") 
+#and then use sapply() or map() to apply your new function to n <- c(100, 500, 1000, 5000, 10000).
+#Note: You only need to set the seed once before running your function; 
+#do not set a seed within your function.
+#Also be sure to use sapply() or map() as you will get different answers running the simulations individually due to setting the seed.
