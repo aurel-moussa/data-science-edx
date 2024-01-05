@@ -18,5 +18,8 @@ function(input_dataset) {test_index <- createDataPartition(input_dataset, times 
 train_set <- input_dataset %>% slice(-test_index) #slice the input_dataset set, and drop all the indexes as defined in test-index
 test_set <- input_dataset %>% slice(test_index)  #slice the input_dataset set, and keep all the indexes as defined in test-index
 fit <- lm(y ~ x, data = train_set) #lm fits linear models, including multivariate ones, first parameter being the symbolic description of the model to be fitted, here: describe y via x
-fit$coef                         
+print(fit$coef)
+y_hat <- predict(fit, test_set)
+root_mean_square_deviation <- mean((y_hat - test_set$y)^2)
+print(root_mean_square_deviation)
 }
