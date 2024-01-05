@@ -14,7 +14,7 @@ dat <- MASS::mvrnorm(n = 100, c(69, 69), Sigma) %>%
 #(3) generate predictions on the test set, and (4) calculate the RMSE of that model.
 #Then, report the mean and standard deviation (SD) of the RMSEs from all 100 models.
 
-output_square_deviation <- list()
+output_square_deviation <- c() #empty vector
 
 partition_and_model_function <- function(input_dataset) {test_index <- createDataPartition(input_dataset, times = 1, p = 0.5, list = FALSE)
 train_set <- input_dataset %>% slice(-test_index) #slice the input_dataset set, and drop all the indexes as defined in test-index
