@@ -53,6 +53,7 @@ create_datasets <- function(input_size_of_dataframe){
         Sigma <- 9*matrix(c(1.0, 0.5, 0.5, 1.0), 2, 2)
         dat <- MASS::mvrnorm(n = 100, c(69, 69), Sigma) %>%
         data.frame() %>% setNames(c("x", "y"))
+        
         return dat
 }
 
