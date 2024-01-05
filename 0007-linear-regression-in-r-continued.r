@@ -14,7 +14,9 @@ dat <- MASS::mvrnorm(n = 100, c(69, 69), Sigma) %>%
 #(3) generate predictions on the test set, and (4) calculate the RMSE of that model.
 #Then, report the mean and standard deviation (SD) of the RMSEs from all 100 models.
 
-function(input_dataset) {test_index <- createDataPartition(input_dataset, times = 1, p = 0.5, list = FALSE)
+output_square_deviation <- list()
+
+partition_and_model_function <- function(input_dataset) {test_index <- createDataPartition(input_dataset, times = 1, p = 0.5, list = FALSE)
 train_set <- input_dataset %>% slice(-test_index) #slice the input_dataset set, and drop all the indexes as defined in test-index
 test_set <- input_dataset %>% slice(test_index)  #slice the input_dataset set, and keep all the indexes as defined in test-index
 fit <- lm(y ~ x, data = train_set) #lm fits linear models, including multivariate ones, first parameter being the symbolic description of the model to be fitted, here: describe y via x
@@ -22,4 +24,5 @@ print(fit$coef)
 y_hat <- predict(fit, test_set)
 root_mean_square_deviation <- mean((y_hat - test_set$y)^2)
 print(root_mean_square_deviation)
+output_square_deviation <- append(output_square_deviation, root_mean_square_deviation)                                                     
 }
