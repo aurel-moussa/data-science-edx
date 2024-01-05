@@ -68,4 +68,4 @@ dataset_creation_partition_and_model <- function(input_size_of_dataframe) {
 
 set.seed(1, sample.kind="Rounding") # if using R 3.6 or later2, just to ensure reproducibility
 different_dataset_sizes <- c(100, 500, 1000, 5000, 10000)
-sapply(different_dataset_sizes, dataset_creation_partition_and_model(x))
+sapply(different_dataset_sizes, dataset_creation_partition_and_model(different_dataset_sizes))
