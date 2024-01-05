@@ -65,3 +65,7 @@ dataset_creation_partition_and_model <- function(input_size_of_dataframe) {
         sd_output_RMSR <- sd(output_root_mean_square_error)
         print(paste('For size of ', input_size_of_dataframe, 'the mean of the RMSE is ', mean_output_RMSR, 'and the standard deviation ', sd_output_RMSR ))
 }
+
+set.seed(1, sample.kind="Rounding") # if using R 3.6 or later2, just to ensure reproducibility
+different_dataset_sizes <- c(100, 500, 1000, 5000, 10000)
+sapply(different_dataset_sizes, dataset_creation_partition_and_model(x))
