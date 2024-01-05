@@ -59,7 +59,7 @@ create_datasets <- function(input_size_of_dataframe) {
 }
 
 dataset_creation_partition_and_model <- function(input_size_of_dataframe) {
-        set.seed(1, sample.kind="Rounding") # if using R 3.6 or later2, just to ensure reproducibility
+
         created_dataframe <- create_datasets(input_size_of_dataframe)
         output_root_mean_square_error <- replicate(100, partition_and_model_function(created_dataframe))
         mean_output_RMSR <- mean(output_root_mean_square_error)
@@ -69,4 +69,6 @@ dataset_creation_partition_and_model <- function(input_size_of_dataframe) {
 
 
 different_dataset_sizes <- c(100, 500, 1000, 5000, 10000)
+
+set.seed(1, sample.kind="Rounding") # if using R 3.6 or later2, just to ensure reproducibility
 sapply(different_dataset_sizes, dataset_creation_partition_and_model)
