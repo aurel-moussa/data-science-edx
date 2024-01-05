@@ -111,3 +111,7 @@ n <- 100
 Sigma <- 9*matrix(c(1.0, 0.95, 0.95, 1.0), 2, 2)
 dat <- MASS::mvrnorm(n = 100, c(69, 69), Sigma) %>%
 	data.frame() %>% setNames(c("x", "y"))
+
+output_square_deviation <- replicate(100, partition_and_model_function(dat))
+mean(output_square_deviation)
+sd(output_square_deviation)
