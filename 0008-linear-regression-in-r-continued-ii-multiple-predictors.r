@@ -26,3 +26,12 @@ sqrt(rootm_mean_square_deviation)
 
 #we can make the above more multi-purpose, by allowing the user to specificy which x variables to use for the fitting
 #we managed to find that the both x's together make the least root mean square error
+
+####
+#Now, lets build a dataset where x1 and x2 are highly correlated, so not really indepedent variables
+
+# set.seed(1) # if using R 3.5 or earlier
+set.seed(1, sample.kind="Rounding") # if using R 3.6 or later
+Sigma <- matrix(c(1.0, 0.75, 0.75, 0.75, 1.0, 0.95, 0.75, 0.95, 1.0), 3, 3)
+dat <- MASS::mvrnorm(n = 100, c(0, 0, 0), Sigma) %>%
+	data.frame() %>% setNames(c("y", "x_1", "x_2"))
