@@ -18,8 +18,11 @@ fit <- lm(y ~ x, data = train_set) #lm fits linear models, including multivariat
 print(fit$coef)
 y_hat <- predict(fit, test_set)
 root_mean_square_deviation <- mean((y_hat - test_set$y)^2)
-print(root_mean_square_deviation)
-output_square_deviation <- append(output_square_deviation, root_mean_square_deviation)                                                     
+print(root_mean_square_deviation)                                                 
 }
 
+#then, since we care about the ROOT mean square deviation
+sqrt(rootm_mean_square_deviation)
+
 #we can make the above more multi-purpose, by allowing the user to specificy which x variables to use for the fitting
+#we managed to find that the both x's together make the least root mean square error
