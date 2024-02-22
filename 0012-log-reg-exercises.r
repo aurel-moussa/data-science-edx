@@ -17,3 +17,15 @@ list(train = data.frame(x = x, y = as.factor(y)) %>% slice(-test_index),
 }
 
 dat$train %>% ggplot(aes(x, color = y)) + geom_density()
+
+#Set the seed to 1, then use the make_data() function defined above to generate 25 different datasets with mu_1 <- seq(0, 3, len=25). 
+#Perform logistic regression on each of the 25 different datasets (predict 1 if p>0.5) and plot accuracy (res in the figures) vs mu_1 (delta in the figures).
+
+delta <- seq(0, 3, len = 25)
+res <- sapply(delta, function(d){
+	dat <- make_data(mu_1 = d)
+	fit_glm <- dat$train %>% glm(y ~ x, family = "binomial", data = .)
+	y_hat_glm <- ifelse(predict(fit_glm, dat$test) > 0.5, 1, 0) %>% factor(levels = c(0, 1))
+	mean(y_hat_glm == dat$test$y)
+})
+qplot(delta, res)
